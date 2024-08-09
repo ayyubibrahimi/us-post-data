@@ -8,3 +8,4 @@ src/
 map/
 *.csv
 archive/
+clean/
