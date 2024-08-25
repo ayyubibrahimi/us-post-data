@@ -303,6 +303,34 @@ def clean_names(df: pd.DataFrame, cols: list[str]) -> pd.DataFrame:
     return df
 
 
+def collapse_contiguous_stints(df: pd.DataFrame) -> pd.DataFrame:
+    """Takes multiple contiguous stints for an individual at an agency, and assigns a stint_id
+    """
+
+import pandas as pd
+df = pd.read_csv('~/git/police-certification/etl/CA/output/ca-2023-clean-corrections.csv')
+df = df.sort_values(['person_nbr', 'agcy_name', 'start_date'], inplace=False)
+#df.start_date = pd.to_datetime(df.start_date, utc=False)
+#df.end_date = pd.to_datetime(df.end_date, utc=False)
+
+def flatten_stints(stints):
+    pass
+#assert stints.start_date.isna().sum() == 0
+s = stints.sort_values(['person_nbr', 'agcy_name', 'start_date'], inplace=False)
+fv = pd.to_datetime('1800-01-01', utc=False)
+s['new_stint'] = (s.start_date - s.end_date.shift(1, fill_value=fv)) > pd.to_timedelta(1, 'days')
+s['stint_no'] = np.cumsum(s.new_stint)
+s['start_date'] = s.groupby('stint_no', group_keys=False).start_date.assign(np.min)
+
+do_something = [g for gid,g in df.groupby(['person_nbr', 'agcy_name']) if len(g) > 1]
+stints = do_something[1][['person_nbr', 'full_name', 'agcy_name', 'start_date', 'end_date']]
+
+new_stint = (stints.start_date - stints.end_date.shift(1)) > pd.to_timedelta(1, 'days')
+stints
+stints['true_stint_id'] = np.cumsum(new_stint)
+
+grp['prv_end'] = grp.end_date.shift(1)
+
 name_pattern_1 = re.compile(r"^(\w{2,}) (\w\.) (\w{2,}.+)$")
 name_pattern_2 = re.compile(r"^([-\w\']+), (\w{2,})$")
 name_pattern_3 = re.compile(r'^(\w{2,}) ("\w+") ([-\w\']+)$')
