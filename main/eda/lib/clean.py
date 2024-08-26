@@ -303,33 +303,41 @@ def clean_names(df: pd.DataFrame, cols: list[str]) -> pd.DataFrame:
     return df
 
 
-def collapse_contiguous_stints(df: pd.DataFrame) -> pd.DataFrame:
-    """Takes multiple contiguous stints for an individual at an agency, and assigns a stint_id
+def assign_stint_id(stints: pd.DataFrame) -> pd.DataFrame:
+    """Takes multiple contiguous stints for an individual at an agency, and assigns a stint_id 
+    (assumes `stints` is ordered by start_date)
     """
+    if len(stints) > 1:
+        return stints
+    today = pd.to_datetime(datetime.date.today(), utc=False)
+    stints['usable_end_date'] = today
+    stints['new_stint'] = (stints.start_date - stints.usable_end_date.shift(1, fill_value=today)) > pd.to_timedelta(1, 'days') 
+    stints['stint_id'] = np.cumsum(stints.new_stint)
+    stints.drop(['new_stint', 'usable_end_date'], inplace=True, axis=1)
+    return stints
 
-import pandas as pd
-df = pd.read_csv('~/git/police-certification/etl/CA/output/ca-2023-clean-corrections.csv')
-df = df.sort_values(['person_nbr', 'agcy_name', 'start_date'], inplace=False)
-#df.start_date = pd.to_datetime(df.start_date, utc=False)
-#df.end_date = pd.to_datetime(df.end_date, utc=False)
 
-def flatten_stints(stints):
-    pass
-#assert stints.start_date.isna().sum() == 0
-s = stints.sort_values(['person_nbr', 'agcy_name', 'start_date'], inplace=False)
-fv = pd.to_datetime('1800-01-01', utc=False)
-s['new_stint'] = (s.start_date - s.end_date.shift(1, fill_value=fv)) > pd.to_timedelta(1, 'days')
-s['stint_no'] = np.cumsum(s.new_stint)
-s['start_date'] = s.groupby('stint_no', group_keys=False).start_date.assign(np.min)
+def collapse_contiguous_stints(df: pd.DataFrame, bycols = ['person_nbr', 'full_name', 'agcy_name']) -> pd.DataFrame:
+    # assume missing end dates are current employment, and use today's date for sorting purposes
+    assert df.start_date.notna().all()
+    today = pd.to_datetime(datetime.date.today(), utc=False)
+    working = df.sort_values(['person_nbr', 'agcy_name', 'start_date'], inplace=False)
+    working['start_date'] = pd.to_datetime(working.start_date, utc=False)
+    working['end_date'] = pd.to_datetime(working.end_date, utc=False).fillna(today)
+    grouped = working.groupby(bycols)
+    working['prv_end'] = grouped['end_date'].shift(1, fill_value=today)
+    working['new_stint'] = (working.start_date - working.prv_end) > pd.to_timedelta(1, 'days')
+    working['stint_id'] = grouped['new_stint'].cumsum()
+    collapsible = working.groupby(bycols + ['stint_id'])
+    summaries = { k: lambda x: x.tail(1) for k in df.columns if k not in bycols }
+    summaries['start_date'] = 'min'
+    summaries['end_date'] = 'max'
+    out = collapsible.aggregate(summaries).reset_index()
+    out['start_date'] = out['start_date'].dt.strftime('%Y-%m-%d')
+    out['end_date'] = out['end_date'].dt.strftime('%Y-%m-%d')
+    out.loc[out.end_date == today.strftime('%Y-%m-%d'), 'end_date'] = None
+    return out.drop(['stint_id'], axis=1, inplace=False)
 
-do_something = [g for gid,g in df.groupby(['person_nbr', 'agcy_name']) if len(g) > 1]
-stints = do_something[1][['person_nbr', 'full_name', 'agcy_name', 'start_date', 'end_date']]
-
-new_stint = (stints.start_date - stints.end_date.shift(1)) > pd.to_timedelta(1, 'days')
-stints
-stints['true_stint_id'] = np.cumsum(new_stint)
-
-grp['prv_end'] = grp.end_date.shift(1)
 
 
 name_pattern_1 = re.compile(r"^(\w{2,}) (\w\.) (\w{2,}.+)$")
