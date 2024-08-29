@@ -5,23 +5,29 @@ import io
 
 # Dictionary of states with their respective Dropbox links
 state_links = {
-    "Arizona": "https://www.dropbox.com/scl/fi/iz7qapn9k4pw5qxgmwm4v/az-2023-index-enhanced.csv?rlkey=45ftkb9f4k4xiiuoc4v12hq9e&st=bnd5oir7&dl=1",
-    "California": "https://www.dropbox.com/scl/fi/pxdpyw5xo496xd6rv1quo/ca-2023-2024-index.csv?rlkey=bcgdnrpa4rcobns1xsbvrmy88&st=gpmjodc2&dl=1",
-    "Florida": "https://www.dropbox.com/scl/fi/xjyscaapny8bx7h9vlibm/fl-2023-index-enhanced.csv?rlkey=hljaaklh5768gcbhry1qxjg1y&st=pky91pgw&dl=1",
-    "Georgia": "https://www.dropbox.com/scl/fi/4o9gmc8jrm2ludkxbx2v6/ga-2024-enhanced-work-history.csv?rlkey=a3ykfd3s7udhueaa7yph29lg4&st=zqrfyhyq&dl=1",
-    "Illinois": "https://www.dropbox.com/scl/fi/a30g6j0o5t7jf9pk4wi9j/illinois-index.csv?rlkey=6yohhjtvob5fmuxjup8cnbpp1&st=oqjizzhh&dl=1",
-    "Maryland": "https://www.dropbox.com/scl/fi/685ikwoi46ek5dwrw2ekf/md-2023-index-enhanced.csv?rlkey=jzx045s9or8u4iari3btzfzbu&st=oerr2dfw&dl=1",
-    "Ohio": "https://www.dropbox.com/scl/fi/6is42e5c12suu3iacu8as/oh-2023-index.csv?rlkey=2z4g8aljqyl6mov6bppvlbp51&st=1pwy64nr&dl=1",
-    "Oregon": "https://www.dropbox.com/scl/fi/2thwgk4o3oeadabppus5v/or-2023-index.csv?rlkey=gftk2k0zlgmfwqzyktum9pfma&st=oso64lbz&dl=1",
-    "South Carolina": "https://www.dropbox.com/scl/fi/clqckb5aje74u9r11d4ha/sc-2023-index-enhanced.csv?rlkey=q4ltth3rr7knn7dhn1f23hequ&st=bprwyxxm&dl=1",
-    "Tennessee": "https://www.dropbox.com/scl/fi/umcchekukm9po2c5gcdfj/tn-2024-enhanced-work-history.csv?rlkey=3z16b466rml17qeha8zt799co&st=0fj9uju5&dl=1",
-    "Texas": "https://www.dropbox.com/scl/fi/6d9a74w5hkqh4vg29qvmi/tx-2023-index-enhanced.csv?rlkey=mz79cw0yjo0qe92a318wqzqxd&st=c14wwzy9&dl=1",
-    "Vermont": "https://www.dropbox.com/scl/fi/n5gb9z7nhxtxb86kf6jxg/vt-2023-index.csv?rlkey=60brq1sks5ymr5g5iolm9ar44&st=helg1pay&dl=1",
-    "Washington": "https://www.dropbox.com/scl/fi/x7ctc400wd1gb32a87kkc/wa-2023-enhanced-work-history.csv?rlkey=u0dl1jtsixg2fv8sxjz0kb77s&st=8h13p1sl&dl=1",
-    "West Virginia": "https://www.dropbox.com/scl/fi/5aesd3u0izcom5fh64v77/wv-2024-enhanced-work-history.csv?rlkey=olhz1vy8e2xrmjov0mi27irw6&st=njmi7vay&dl=1",
-    "Utah": "https://www.dropbox.com/scl/fi/v6de7503zseqcefcms6bp/ut-2024-index.csv?rlkey=bhuwqvyp8iu02drev2pibe0ls&st=y36ma1q0&dl=1",
-    "Alaska": "https://www.dropbox.com/scl/fi/pzrtdx2w5dn5jbt3o2ywr/ak-2023-index-enhanced.csv?rlkey=rx9g8mboaw42p97uunl26z7l4&st=o7wigq1t&dl=1",
-}
+    "alaska": "https://www.dropbox.com/scl/fi/46hmzd088xsfodjvrn1nd/alaska_index.csv?rlkey=sxm9twoj6e5yunourtxbtxtdf&st=9yrbcvvm&dl=1",
+    "arizona": "https://www.dropbox.com/scl/fi/7l9iaj2qbzq2i0azey2fl/arizona_index.csv?rlkey=2kvtnw5iaonixm08i922c5yw0&st=01o4r4j0&dl=1",
+    "california": "https://www.dropbox.com/scl/fi/ait32murofp7b360p9hni/california_index.csv?rlkey=vup9ugrdrbne4kf9mdzuiocle&st=7ud05clp&dl=1",
+    "florida": "https://www.dropbox.com/scl/fi/kxka39be3jgv3srbn1f73/florida_index.csv?rlkey=afrejm92m8hs0dxm4x72qq8bn&st=vmvj677c&dl=1",
+    "georgia": "https://www.dropbox.com/scl/fi/20w121u4y0he9jq1j2psu/georgia_index.csv?rlkey=btvxikx1glfxg16hpvvmxtqc1&st=49ityxa5&dl=1",
+    "idaho": "https://www.dropbox.com/scl/fi/f2zr19a3rgil24xhvmcj4/idaho_index.csv?rlkey=6x2j6rkr503e3k5627j459eyf&st=1img7u6b&dl=1",
+    "illinois": "https://www.dropbox.com/scl/fi/853ypyqq4jz77569npo7w/illinois_index.csv?rlkey=6rsa807ec0an01ndna0jwvmnp&st=3l9fwzw1&dl=1",
+    "indiana": "https://www.dropbox.com/scl/fi/pqurhfpdugciuuzefcau2/indiana_index.csv?rlkey=g6bufpogn4n7bqmrvvz6asm5s&st=bc8tf1k9&dl=1",
+    "kentucky": "https://www.dropbox.com/scl/fi/wnlfju2e7jmkg25xudvtc/kentucky_index.csv?rlkey=fmz2x3dujtajhrgeguvz8sjzx&st=mbw1oc6o&dl=0",
+    "maryland": "https://www.dropbox.com/scl/fi/p2u4254laj2kp1ruze5h3/maryland_index.csv?rlkey=ng77xq0b0wxe5z7pwu4gmzxt4&st=oedklcmp&dl=1",
+    "north_carolina": "https://www.dropbox.com/scl/fi/jjinf4bfyk5umweq203bh/north_carolina_index.csv?rlkey=yrcwnb442xgpbi1ybvrsk6ur8&st=s2ffmcxt&dl=1",
+    "new_mexico": "https://www.dropbox.com/scl/fi/ud8lsz7gczmdomiqbgbru/new_mexico_index.csv?rlkey=byk4erkpozp8ugshkneus7pzc&st=dydvr966&dl=1",
+    "ohio": "https://www.dropbox.com/scl/fi/nxdwwcuo2c4mz2igxyzrl/ohio_index.csv?rlkey=rne8ji1x4rarh2zggsuz6pnng&st=89fm02rd&dl=1",
+    "oregon": "https://www.dropbox.com/scl/fi/6bhtcbs4u0i4zv0odj62v/oregon_index.csv?rlkey=w2gcmt61xmnhlu8hyc7b9ybci&st=t5vydjay&dl=1",
+    "south_carolina": "https://www.dropbox.com/scl/fi/j3c6mioqjmxddv1cs6602/south_carolina_index.csv?rlkey=w0d2crkkdjhleal88zxe16tzr&st=1fmrbk16&dl=1",
+    "tennessee": "https://www.dropbox.com/scl/fi/0dk91k4exbuyiqvxgvmbt/tennessee_index.csv?rlkey=gdmlku4csh4lf8l39fv5zr4za&st=5zs52d8j&dl=1",
+    "texas": "https://www.dropbox.com/scl/fi/9257upb2n6inzs5sbwbz8/texas_index.csv?rlkey=ulz5ws8qyn0mmzs2feuvtz3c3&st=1jud1usv&dl=1",
+    "utah": "https://www.dropbox.com/scl/fi/yizi8kmdi7mt2nyleffj8/utah_index.csv?rlkey=syhxhallr63rs6lpjesmihteh&st=smaqhvmt&dl=1",
+    "vermont": "https://www.dropbox.com/scl/fi/pyqy5p3srsp2tcjfwq865/vermont_index.csv?rlkey=t589hmxphf2movo3adwt1wrzn&st=psfk7k8p&dl=1",
+    "washington": "https://www.dropbox.com/scl/fi/7hrjnpbrgq6iw4bbgozbv/washington_index.csv?rlkey=shs9lpp2vmq38d3gttvp8d65g&st=gcj67okf&dl=1",
+    "west_virginia": "https://www.dropbox.com/scl/fi/iubdg5lxd3vf29sfbrwyu/west_virginia_index.csv?rlkey=g8r9fwgxp36xhd9h508n5ztfz&st=aq9zl624&dl=1",
+    "wyoming": "https://www.dropbox.com/scl/fi/p3rpali2bohcesxko88yc/wyoming_index.csv?rlkey=9do9v4w0qu8g7qdnzwdqdffgx&st=v2svhbe6&dl=0",
+    }
 
 # Directory to save the CSV files
 output_dir = "data"
