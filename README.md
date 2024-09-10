@@ -106,22 +106,48 @@
     ├── firebase_upload.py
 ```
 
-- `bln/`: Contains clean scripts from the BLN (Big Local News) repository, organized by state.
-- `eda/`: Contains notebooks and scripts for exploratory data analysis.
+# US State-level POST Dataset Analysis
 
-Pipeline:
-- `preprocess/`: 
-1. Contains a download directory for BLN tables. Running Make downloads available the tables from the BLN repo that are stored in Dropbox. Any tables not in the BLN repo/BLN Dropbox were accessed locally. 
-2. Contains scripts for additional processing of BLN data, e.g., added separation reason data and demographic data. 
-3. Manually upload cleaned tables to Dropbox
+## Directory Structure
 
-- `download/`: 
-1. Running Make downloads each cleaned table from Dropbox that was uploaded after the `preprocess/` stage
+### Main Directories
 
-- `normalize/`: 
-1. Running Make iterates over each table downloaded from Dropbox for normalization, e.g., consistent casing 
+- `bln/`: Clean scripts from the BLN (Big Local News) repository, organized by state.
+- `eda/`: Notebooks and scripts for exploratory data analysis.
 
-- `upload/`: 
-1. Running Make uploads each normalized table into Firebase storage 
+### Pipeline Stages
 
-A video demo of the tool can be found [here](https://www.dropbox.com/scl/fi/unj5cwnxspepehgf9ih3d/Georgia-without-map.mov?rlkey=hfwl05t8ain20grdafqe6jnz7&st=4m0nedbv&dl=0).
+#### 1. Preprocess
+Location: `preprocess/`
+
+- **Download**: 
+  - Contains a directory for BLN tables.
+  - Running `make` downloads available tables from the BLN repo stored in Dropbox.
+  - Tables not in BLN repo/Dropbox are accessed locally.
+
+- **Processing**:
+  - Scripts for additional processing of BLN data.
+  - Examples: Added separation reason data and demographic data.
+
+- **Output**:
+  - Manually upload cleaned tables to Dropbox.
+
+#### 2. Download
+Location: `download/`
+
+- Running `make` downloads each cleaned table from Dropbox (uploaded after the preprocess stage).
+
+#### 3. Normalize
+Location: `normalize/`
+
+- Running `make` iterates over each downloaded table for normalization.
+- Example: Ensures consistent casing across data.
+
+#### 4. Upload
+Location: `upload/`
+
+- Running `make` uploads each normalized table into Firebase storage.
+
+## Demo
+
+A video demonstration of the tool is available [here](https://www.dropbox.com/scl/fi/unj5cwnxspepehgf9ih3d/Georgia-without-map.mov?rlkey=hfwl05t8ain20grdafqe6jnz7&st=4m0nedbv&dl=0).
