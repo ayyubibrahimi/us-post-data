@@ -8,3 +8,8 @@ map/
 *.csv
 archive/
 clean/
+normalized-archive/
+*.tsx
+*.json
+preprocess/download
+eda/
