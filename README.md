@@ -111,17 +111,17 @@
 
 Pipeline:
 - `preprocess/`: 
-1. Contains a download directory. Running Make downloads available the index files from the BLN repo. Any index files not in the BLN repo were referenced locally. 
+1. Contains a download directory for BLN tables. Running Make downloads available the tables from the BLN repo that are stored in Dropbox. Any tables not in the BLN repo/BLN Dropbox were accessed locally. 
 2. Contains scripts for additional processing of BLN data, e.g., added separation reason data and demographic data. 
-3. Output has been added to Dropbox. 
+3. Manually upload cleaned tables to Dropbox
 
 - `download/`: 
-1. Running Make downloads the index files that are the output of the `preprocess/` stage
+1. Running Make downloads each cleaned table from Dropbox that was uploaded after the `preprocess/` stage
 
 - `normalize/`: 
-1. Running Make iterates over each file in the `download/` directory and normalizes each script, e.g., consistent casing 
+1. Running Make iterates over each table downloaded from Dropbox for normalization, e.g., consistent casing 
 
 - `upload/`: 
-1. Running Make stores the output of the `normalize/` stage into Firebase storage 
+1. Running Make uploads each normalized table into Firebase storage 
 
 A video demo of the tool can be found [here](https://www.dropbox.com/scl/fi/unj5cwnxspepehgf9ih3d/Georgia-without-map.mov?rlkey=hfwl05t8ain20grdafqe6jnz7&st=4m0nedbv&dl=0).
