@@ -24,7 +24,7 @@ def delete_georgia_documents_in_batches():
     total_deleted = 0
     
     # Query for documents that start with "georgia-processed.csv_"
-    query = db.collection('uploads').order_by('__name__').start_at(['georgia-processed.csv_']).end_at(['georgia-processed.csv_\uf8ff'])
+    query = db.collection('uploads').order_by('__name__').start_at(['maryland-processed.csv_']).end_at(['maryland-processed.csv_\uf8ff'])
 
     while True:
         # Get the next batch of documents

@@ -2,6 +2,7 @@ import os
 import gzip
 import pandas as pd
 import datetime
+import numpy as np
 
 INPUT_DIR = '../../download/data'
 OUTPUT_DIR = '../../upload/data/input'
@@ -34,7 +35,7 @@ def apply_transformations(df):
     ]
     
     for col in columns_to_transform:
-        if col in df.columns:
+        if col in df.columns: 
             df[col] = df[col].fillna('').astype(str).str.lower().str.strip()
         else:
             print(f"Column '{col}' not found. Skipping transformation for this column.")
@@ -54,6 +55,14 @@ def assign_stint_id(stints: pd.DataFrame) -> pd.DataFrame:
     stints.drop(['new_stint', 'usable_end_date'], inplace=True, axis=1)
     return stints
 
+def clean_date(date_str):
+    try:
+        year = int(date_str[:4])
+        if year < 1800 or year > 2100:  # Adjust the range as needed
+            return None
+        return date_str
+    except:
+        return None
 
 def collapse_contiguous_stints(df: pd.DataFrame, bycols = ['person_nbr', 'full_name', 'agency_name']) -> pd.DataFrame:
     # assume missing end dates are current employment, and use today's date for sorting purposes
@@ -62,6 +71,8 @@ def collapse_contiguous_stints(df: pd.DataFrame, bycols = ['person_nbr', 'full_n
     today = pd.to_datetime(datetime.date.today(), utc=False)
     ancient = pd.to_datetime('1800-01-01', utc=False)
     working = df.sort_values(['person_nbr', 'agency_name', 'start_date'], inplace=False)
+    working['start_date'] = working['start_date'].apply(clean_date)
+    working['end_date'] = working['end_date'].apply(clean_date)
     working['start_date'] = pd.to_datetime(working.start_date, utc=False).fillna(ancient)
     working['end_date'] = pd.to_datetime(working.end_date, utc=False).fillna(today)
     working.loc[working.start_date < ancient, 'start_date'] = ancient
@@ -114,9 +125,14 @@ def main():
     
     os.makedirs(OUTPUT_DIR, exist_ok=True)
     
-    # processed_states = ['arizona', 'california', 'illinois', 'tennessee', 'utah', 'west-virginia', 'georgia', 'florida', 'tennessee', 'washington',  'wyoming', 'texas', 'ohio', 'kentucky' ]
+    # processed_states = ['arizona', 'california', 'illinois', 'tennessee', 'utah', 'west-virginia', 'georgia', 'florida',washington',  'wyoming', 'texas', 'ohio', 'kentucky' ]
 
-    states_to_process = ['maryland', 'idaho', 'new-mexico', 'oregon', 'south-carolina', 'vermont']
+    # states_to_process = ['maryland', 'idaho', 'new-mexico', 'oregon', 'south-carolina', 'vermont']
+
+    # states_to_process = ['idaho', 'new-mexico']
+
+    states_to_process = ['idaho', 'new-mexico', 'south-carolina',]
+
 
     for state in states_to_process:
         process_state_data(state)
