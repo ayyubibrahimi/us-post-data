@@ -82,6 +82,10 @@ def collapse_contiguous_stints(df: pd.DataFrame, bycols = ['person_nbr', 'full_n
     return out.drop(['stint_id'], axis=1, inplace=False)
 
 
+def filter_anons(df: pd.DataFrame) -> pd.DataFrame:
+    return df.loc[~df.full_name.str.contains('WITHHELD')]
+
+
 def process_state_data(state_name):
     input_file_path = os.path.join(INPUT_DIR, state_name, f'{state_name}_index.csv')
     output_file_path = os.path.join(OUTPUT_DIR, f'{state_name}-processed.csv.gz')
@@ -95,6 +99,7 @@ def process_state_data(state_name):
 
     try:
         df = apply_transformations(df)
+        df = filter_anons(df)
         df = collapse_contiguous_stints(df)
     except ValueError as e:
         print(f"Error processing {state_name}: {str(e)}")
