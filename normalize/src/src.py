@@ -83,7 +83,7 @@ def collapse_contiguous_stints(df: pd.DataFrame, bycols = ['person_nbr', 'full_n
 
 
 def filter_anons(df: pd.DataFrame) -> pd.DataFrame:
-    return df.loc[~df.full_name.str.contains('WITHHELD')]
+    return df.loc[~df.full_name.str.contains('WITHHELD')].copy()
 
 
 def process_state_data(state_name):
