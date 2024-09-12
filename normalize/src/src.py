@@ -106,12 +106,12 @@ def process_state_data(state_name):
     print(f'Processed and saved: {output_file_path}')
 
 def main():
+    
     os.makedirs(OUTPUT_DIR, exist_ok=True)
     
-    states_to_process = ['arizona', 'california', 'tennessee', 'utah', 'west-virginia', 'georgia', 'florida', 'tennessee', 'washington',  'wyoming', 'maryland', 'texas', 'ohio', 'kentucky' ]
+    # processed_states = ['arizona', 'california', 'illinois', 'tennessee', 'utah', 'west-virginia', 'georgia', 'florida', 'tennessee', 'washington',  'wyoming', 'texas', 'ohio', 'kentucky' ]
 
-    
-    # states_to_process = ['illinois']  # Add more states as needed
+    states_to_process = ['maryland', 'idaho', 'new-mexico', 'oregon', 'south-carolina', 'vermont']
 
     for state in states_to_process:
         process_state_data(state)

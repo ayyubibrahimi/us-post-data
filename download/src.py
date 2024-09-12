@@ -9,7 +9,7 @@ state_links = {
     "arizona": "https://www.dropbox.com/scl/fi/7l9iaj2qbzq2i0azey2fl/arizona_index.csv?rlkey=2kvtnw5iaonixm08i922c5yw0&st=01o4r4j0&dl=1",
     "california": "https://www.dropbox.com/scl/fi/ait32murofp7b360p9hni/california_index.csv?rlkey=vup9ugrdrbne4kf9mdzuiocle&st=7ud05clp&dl=1",
     "florida": "https://www.dropbox.com/scl/fi/xbvuqf3sx6spr0369j5po/florida_index.csv?rlkey=qhbulvsqggtqqs1t52n5d3hbb&st=1lu4dgzm&dl=1",
-    "georgia": "https://www.dropbox.com/scl/fi/k1p78lxiakdkpj0n6n14x/georgia_index.csv?rlkey=e2iuy4p1u3phtijdgme6hqdik&st=fhoer8c8&dl=1",
+    "georgia": "https://www.dropbox.com/scl/fi/9v66hk1btf5bjiptbyci8/georgia_index.csv?rlkey=c9palqszhp24c9q5mchw6u5ik&st=zneegt73&dl=1",
     "idaho": "https://www.dropbox.com/scl/fi/f2zr19a3rgil24xhvmcj4/idaho_index.csv?rlkey=6x2j6rkr503e3k5627j459eyf&st=1img7u6b&dl=1",
     "illinois": "https://www.dropbox.com/scl/fi/853ypyqq4jz77569npo7w/illinois_index.csv?rlkey=6rsa807ec0an01ndna0jwvmnp&st=3l9fwzw1&dl=1",
     "indiana": "https://www.dropbox.com/scl/fi/pqurhfpdugciuuzefcau2/indiana_index.csv?rlkey=g6bufpogn4n7bqmrvvz6asm5s&st=bc8tf1k9&dl=1",
