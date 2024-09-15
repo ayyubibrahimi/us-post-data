@@ -11,6 +11,46 @@ def clean_column_names(df):
     df.columns = df.columns.str.strip().str.lower().str.replace(r'\s+', '', regex=True)
     return df
 
+def clean_dates(df):
+    df.loc[:, "start_date"] = df.start_date.astype(str).str.replace(r"\.(.+)", "", regex=True)
+    df.loc[:, "end_date"] = df.end_date.astype(str).str.replace(r"\.(.+)", "", regex=True)
+    df.loc[:, "end_date"] = df.end_date.astype(str).str.replace(r"^nan$", "", regex=True)
+    return df 
+
+def apply_proper_casing(df):
+    def proper_case(text):
+        # Split the text into words
+        words = text.split()
+        # Process each word
+        processed_words = []
+        for word in words:
+            # Special handling for Sheriff's
+            if word.lower() == "sheriff's":
+                processed_words.append("Sheriff's Office")
+            # Special handling for suffixes and roman numerals
+            elif word.upper() in ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'JR', 'SR']:
+                processed_words.append(word.upper())
+            # Special handling for abbreviations like 'PD' for Police Department
+            elif len(word) <= 2:
+                processed_words.append(word.upper())
+            # General case: capitalize first letter, lowercase the rest
+            else:
+                processed_words.append(word.capitalize())
+        return ' '.join(processed_words)
+
+    columns_to_transform = [
+        "first_name", "last_name", "middle_name", "agency_name",
+  "separation_reason", "employment_status", "employment_change", "race", "sex", "suffix"
+    ]
+    
+    for col in columns_to_transform:
+        if col in df.columns:
+            df[col] = df[col].apply(lambda x: proper_case(str(x)) if pd.notna(x) else x)
+        else:
+            print(f"Column '{col}' not found. Skipping proper casing for this column.")
+    
+    return df
+
 def check_required_columns(df):
     required_columns = ['agency_name', 'first_name', 'last_name', 'start_date', 'end_date']
     missing_columns = [col for col in required_columns if col not in df.columns]
@@ -25,13 +65,14 @@ def check_empty_values(df):
 
 def apply_transformations(df):
     df = clean_column_names(df)
+    df = df.pipe(clean_dates)
     check_required_columns(df)
     check_empty_values(df)
 
     columns_to_transform = [
         "person_nbr", "first_name", "last_name", "agency_name", 
-        "start_date", "end_date", "separation_reason", "employment_status",
-        "race", "sex", "year_of_birth", "rank", "middle_name", 
+        "start_date", "end_date", "separation_reason", "employment_status", "employment_change",
+        "race", "sex", "year_of_birth", "middle_name", "suffix"
     ]
     
     for col in columns_to_transform:
@@ -39,7 +80,9 @@ def apply_transformations(df):
             df[col] = df[col].fillna('').astype(str).str.lower().str.strip()
         else:
             print(f"Column '{col}' not found. Skipping transformation for this column.")
-    
+
+    df = apply_proper_casing(df)
+
     return df
 
 def assign_stint_id(stints: pd.DataFrame) -> pd.DataFrame:
@@ -110,8 +153,8 @@ def process_state_data(state_name):
 
     try:
         df = apply_transformations(df)
-        df = filter_anons(df)
-        df = collapse_contiguous_stints(df)
+        # df = filter_anons(df)
+        # df = collapse_contiguous_stints(df)
     except ValueError as e:
         print(f"Error processing {state_name}: {str(e)}")
         return
@@ -124,14 +167,15 @@ def process_state_data(state_name):
 def main():
     
     os.makedirs(OUTPUT_DIR, exist_ok=True)
-    
-    # processed_states = ['arizona', 'california', 'illinois', 'tennessee', 'utah', 'west-virginia', 'georgia', 'florida',washington',  'wyoming', 'texas', 'ohio', 'kentucky' ]
 
-    # states_to_process = ['maryland', 'idaho', 'new-mexico', 'oregon', 'south-carolina', 'vermont']
+    states_to_process = ['florida-discipline',]
 
-    # states_to_process = ['idaho', 'new-mexico']
 
-    states_to_process = ['idaho', 'new-mexico', 'south-carolina',]
+    # states_to_process = ['illinois', 'arizona', 'tennessee', 'utah', 'west-virginia', 'georgia', 'florida', 'washington',  'wyoming', 'texas', 'ohio', 'kentucky', 'georgia-discipline']
+
+    # states_to_process_w_anons = ['california']
+
+    # states_to_process_w_continguous_stints = ['maryland', 'idaho', 'oregon', 'south-carolina', 'vermont']
 
 
     for state in states_to_process:

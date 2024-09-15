@@ -20,13 +20,13 @@ state_links = {
     "ohio": "https://www.dropbox.com/scl/fi/nxdwwcuo2c4mz2igxyzrl/ohio_index.csv?rlkey=rne8ji1x4rarh2zggsuz6pnng&st=89fm02rd&dl=1",
     "oregon": "https://www.dropbox.com/scl/fi/6bhtcbs4u0i4zv0odj62v/oregon_index.csv?rlkey=w2gcmt61xmnhlu8hyc7b9ybci&st=t5vydjay&dl=1",
     "south_carolina": "https://www.dropbox.com/scl/fi/j3c6mioqjmxddv1cs6602/south_carolina_index.csv?rlkey=w0d2crkkdjhleal88zxe16tzr&st=1fmrbk16&dl=1",
-    "tennessee": "https://www.dropbox.com/scl/fi/0dk91k4exbuyiqvxgvmbt/tennessee_index.csv?rlkey=gdmlku4csh4lf8l39fv5zr4za&st=5zs52d8j&dl=1",
+    "tennessee": "https://www.dropbox.com/scl/fi/lxz9ocw7gr2qsaexc3cbh/tennessee_index.csv?rlkey=vqgsf94kre0bexaf3rf97np9o&st=gatjace4&dl=1",
     "texas": "https://www.dropbox.com/scl/fi/9257upb2n6inzs5sbwbz8/texas_index.csv?rlkey=ulz5ws8qyn0mmzs2feuvtz3c3&st=1jud1usv&dl=1",
-    "utah": "https://www.dropbox.com/scl/fi/yizi8kmdi7mt2nyleffj8/utah_index.csv?rlkey=syhxhallr63rs6lpjesmihteh&st=smaqhvmt&dl=1",
-    "vermont": "https://www.dropbox.com/scl/fi/pyqy5p3srsp2tcjfwq865/vermont_index.csv?rlkey=t589hmxphf2movo3adwt1wrzn&st=psfk7k8p&dl=1",
+    "utah": "https://www.dropbox.com/scl/fi/fmvoa5fvehuhcxuo1kn2n/utah_index.csv?rlkey=itmztmc6mcohioum0gpjwztdw&st=296tbj2w&dl=1",
+    "vermont": "https://www.dropbox.com/scl/fi/pyqy5p3srsp2tcjfwq865/vermont_index.csv?rlkey=t589hmxphf2movo3adwt1wrzn&st=js9ex0ne&dl=1",
     "washington": "https://www.dropbox.com/scl/fi/7hrjnpbrgq6iw4bbgozbv/washington_index.csv?rlkey=shs9lpp2vmq38d3gttvp8d65g&st=q59u51v7&dl=1",
     "west_virginia": "https://www.dropbox.com/scl/fi/iubdg5lxd3vf29sfbrwyu/west_virginia_index.csv?rlkey=g8r9fwgxp36xhd9h508n5ztfz&st=aq9zl624&dl=1",
-    "wyoming": "https://www.dropbox.com/scl/fi/4c0bb071llxee25vzw4vm/wyoming_index.csv?rlkey=1ihzu4lme06urgrszldkdg0ns&st=oi3x18ts&dl=1",
+    "wyoming": "https://www.dropbox.com/scl/fi/4c0bb071llxee25vzw4vm/wyoming_index.csv?rlkey=1ihzu4lme06urgrszldkdg0ns&st=gduoqyhf&dl=1",
     }
 
 # Directory to save the CSV files
