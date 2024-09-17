@@ -29,7 +29,10 @@ def apply_proper_casing(df):
                 processed_words.append("Sheriff's Office")
             # Special handling for suffixes and roman numerals
             elif word.upper() in ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'JR', 'SR']:
-                processed_words.append(word.upper())
+                if word.upper() in ['JR', 'SR']:
+                    processed_words.append(word.capitalize())
+                else:
+                    processed_words.append(word.upper())
             # Special handling for abbreviations like 'PD' for Police Department
             elif len(word) <= 2:
                 processed_words.append(word.upper())
@@ -168,7 +171,7 @@ def main():
     
     os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-    states_to_process = ['florida-discipline',]
+    states_to_process = ['vermont']
 
 
     # states_to_process = ['illinois', 'arizona', 'tennessee', 'utah', 'west-virginia', 'georgia', 'florida', 'washington',  'wyoming', 'texas', 'ohio', 'kentucky', 'georgia-discipline']

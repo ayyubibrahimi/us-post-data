@@ -15,7 +15,7 @@ db = firestore.client()
     stop=stop_after_attempt(10),
     wait=wait_exponential(multiplier=1, min=4, max=60),
     retry=retry_if_exception_type((ResourceExhausted, DeadlineExceeded))
-)
+)   
 def delete_batch(batch):
     batch.commit()
 
@@ -24,7 +24,7 @@ def delete_georgia_documents_in_batches():
     total_deleted = 0
     
     # Query for documents that start with "georgia-processed.csv_"
-    query = db.collection('uploads').order_by('__name__').start_at(['maryland-processed.csv_']).end_at(['maryland-processed.csv_\uf8ff'])
+    query = db.collection('uploads').order_by('__name__').start_at(['vermont-processed.csv_']).end_at(['vermont-processed.csv_\uf8ff'])
 
     while True:
         # Get the next batch of documents
