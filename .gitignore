@@ -7,7 +7,6 @@ data/
 map/
 *.csv
 archive/
-clean/
 normalized-archive/
 *.tsx
 *.json
