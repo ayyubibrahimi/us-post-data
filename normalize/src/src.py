@@ -17,6 +17,16 @@ def clean_dates(df):
     df.loc[:, "end_date"] = df.end_date.astype(str).str.replace(r"^nan$", "", regex=True)
     return df 
 
+def clean_agency_names(df):
+    df.loc[:, "agency_name"] = (df.agency_name
+                                .str.lower()
+                                .str.strip()
+                                .str.replace(r"office office$", "office", regex=True)
+                                .str.replace(r"\bso$", "sheriff's office", regex=True)
+                                .str.replace(r"\bpd$", "police department", regex=True)
+    )
+    return df
+
 def apply_proper_casing(df):
     def proper_case(text):
         # Split the text into words
@@ -26,7 +36,7 @@ def apply_proper_casing(df):
         for word in words:
             # Special handling for Sheriff's
             if word.lower() == "sheriff's":
-                processed_words.append("Sheriff's Office")
+                processed_words.append("Sheriff's")
             # Special handling for suffixes and roman numerals
             elif word.upper() in ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'JR', 'SR']:
                 if word.upper() in ['JR', 'SR']:
@@ -68,7 +78,7 @@ def check_empty_values(df):
 
 def apply_transformations(df):
     df = clean_column_names(df)
-    df = df.pipe(clean_dates)
+    df = df.pipe(clean_dates).pipe(clean_agency_names)
     check_required_columns(df)
     check_empty_values(df)
 
@@ -156,8 +166,8 @@ def process_state_data(state_name):
 
     try:
         df = apply_transformations(df)
-        # df = filter_anons(df)
-        # df = collapse_contiguous_stints(df)
+        df = filter_anons(df)
+        df = collapse_contiguous_stints(df)
     except ValueError as e:
         print(f"Error processing {state_name}: {str(e)}")
         return
@@ -171,17 +181,17 @@ def main():
     
     os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-    states_to_process = ['vermont']
+    # states_to_process = ['vermont']
 
 
     # states_to_process = ['illinois', 'arizona', 'tennessee', 'utah', 'west-virginia', 'georgia', 'florida', 'washington',  'wyoming', 'texas', 'ohio', 'kentucky', 'georgia-discipline']
 
-    # states_to_process_w_anons = ['california']
+    states_to_process_w_anons = ['california']
 
     # states_to_process_w_continguous_stints = ['maryland', 'idaho', 'oregon', 'south-carolina', 'vermont']
 
 
-    for state in states_to_process:
+    for state in states_to_process_w_anons:
         process_state_data(state)
 
 if __name__ == "__main__":
