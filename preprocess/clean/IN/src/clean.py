@@ -104,5 +104,5 @@ out = final_df.rename(columns = {
         'start_date', 'end_date', 'rank', 'status']]
 
 # Save the transformed DataFrame to a new spreadsheet
-out.to_csv('output/indiana_index.csv')
+out.to_csv('output/indiana_index.csv', index=False)
 
