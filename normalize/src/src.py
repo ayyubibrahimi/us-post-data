@@ -44,7 +44,7 @@ def apply_proper_casing(df):
                 else:
                     processed_words.append(word.upper())
             # Special handling for abbreviations like 'PD' for Police Department
-            elif len(word) <= 2:
+            elif word.upper() in ['PD', 'SO', 'DA', 'UC']:
                 processed_words.append(word.upper())
             # General case: capitalize first letter, lowercase the rest
             else:
