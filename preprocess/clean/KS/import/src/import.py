@@ -20,10 +20,10 @@ def clean_names(df):
 
 if __name__ == "__main__":
     data_input = Path("../input/")
-    whole =  pd.concat(pd.read_excel(x,skiprows=4,usecols="c:k")
+    complete =  pd.concat(pd.read_excel(x,skiprows=4,usecols="c:k")
                        for x in data_input.glob("*.xls"))
-    whole.columns  =  whole.columns.str.lower()
-    whole.columns = whole.columns.str.replace(" ", "_")
-    new_complete = clean_names(whole)
+    complete.columns  =  complete.columns.str.lower()
+    complete.columns = complete.columns.str.replace(" ", "_")
+    new_complete = clean_names(complete)
     new_complete.drop(["unnamed:_3","unnamed:_4"], axis=1, inplace=True)
     new_complete.head()
