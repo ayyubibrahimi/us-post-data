@@ -6,7 +6,14 @@
 import pandas as pd
 from pathlib import Path
 from nameparser import HumanName
+import logging
 
+# Configue the logger
+logging.basicConfig(level=logging.INFO,
+                    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+
+# Create logger instance
+logger = logging.getLogger(__name__)
 
 def clean_names(df):
     out = df
@@ -19,6 +26,7 @@ def clean_names(df):
     return out
 
 if __name__ == "__main__":
+    logger.info("Starting the main program")
     data_input = Path("../input/")
     complete =  pd.concat(pd.read_excel(x,skiprows=4,usecols="c:k")
                        for x in data_input.glob("*.xls"))
@@ -26,4 +34,4 @@ if __name__ == "__main__":
     complete.columns = complete.columns.str.replace(" ", "_")
     new_complete = clean_names(complete)
     new_complete.drop(["unnamed:_3","unnamed:_4"], axis=1, inplace=True)
-    new_complete.head()
+    logger.info(new_complete.head())
