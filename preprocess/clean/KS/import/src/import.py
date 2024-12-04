@@ -26,12 +26,13 @@ def clean_names(df):
     return out
 
 if __name__ == "__main__":
-    logger.info("Starting the main program")
+    #   logger.info("Starting the main program")
     data_input = Path("../input/")
-    complete =  pd.concat(pd.read_excel(x,skiprows=4,usecols="c:k")
+    complete =  pd.concat(pd.read_excel(x,skiprows=5,usecols="c:k")
                        for x in data_input.glob("*.xls"))
     complete.columns  =  complete.columns.str.lower()
     complete.columns = complete.columns.str.replace(" ", "_")
+    print(complete.columns)
     new_complete = clean_names(complete)
     new_complete.drop(["unnamed:_3","unnamed:_4"], axis=1, inplace=True)
     logger.info(new_complete.head())
