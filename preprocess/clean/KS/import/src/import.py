@@ -39,3 +39,5 @@ if __name__ == "__main__":
     new_complete_2.drop_duplicates(inplace=True)
     logger.info(new_complete.head())
     logger.info(new_complete_2[new_complete_2['cert_id'] == 16215])
+
+# Done
