@@ -15,6 +15,41 @@ logging.basicConfig(level=logging.INFO,
 # Create logger instance
 logger = logging.getLogger(__name__)
 
+"""
+Column standard naming convention use all names that are present in dataframe.
+
+column_names = [
+    "person_nbr",
+    "full_name",
+    "last_name",
+    "first_name",
+    "middle_name",
+    "middle_initial",
+    "suffix",
+    "birth_year",
+    "age",
+    "agcy_name",
+    "type",
+    "rank",
+    "start_date",
+    "end_date"]
+"""
+
+column_names =[
+    "person_nbr",
+    "full_name",
+    "last_name",
+    "first_name",
+    "middle_name",
+    "middle_initial",
+    "suffix",
+    "agcy_name",
+    "rank",
+    "status",
+    "start_date",
+    "end_date"]
+
+
 def clean_names(df):
     out = df
     hn = out.officer_name.apply(HumanName)
@@ -37,7 +72,15 @@ if __name__ == "__main__":
     logger.info(new_complete[new_complete['cert_id'] == 16215])
     new_complete_2 = new_complete.copy()
     new_complete_2.drop_duplicates(inplace=True)
-    logger.info(new_complete.head())
     logger.info(new_complete_2[new_complete_2['cert_id'] == 16215])
+
+    logger.info(new_complete_2.columns)
+    new_complete_2.rename(columns={'officer_name': 'full_name',
+                                'officers_rank':'rank',
+                               'stop_or_leave_date': 'end_date',
+                                'cert_id': 'person_nbr',
+                               'agency_name':'agcy_name'}, inplace=True)
+    new_complete_2 = new_complete_2.loc[:, column_names]
+    logger.info(new_complete_2.columns)
 
 # Done
