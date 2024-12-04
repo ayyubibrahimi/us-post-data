@@ -7,11 +7,11 @@ import pandas as pd
 from pathlib import Path
 from nameparser import HumanName
 import logging
+import os
 
 # Configue the logger
 logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+    level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
 )
 
 # Create logger instance
@@ -65,19 +65,21 @@ def clean_names(df):
 
 
 if __name__ == "__main__":
-    #   logger.info("Starting the main program")
     data_input = Path("../input/")
     complete = pd.concat(
         pd.read_excel(x, skiprows=5, usecols="c:k") for x in data_input.glob("*.xls")
     )
+    logger.info("Data Loaded")
     complete.columns = complete.columns.str.lower()
     complete.columns = complete.columns.str.replace(" ", "_")
     new_complete = clean_names(complete)
     new_complete.drop(["unnamed:_3", "unnamed:_4"], axis=1, inplace=True)
+    logger.info("Columns cleaned")
     logger.info(new_complete[new_complete["cert_id"] == 16215])
     new_complete_2 = new_complete.copy()
     new_complete_2.drop_duplicates(inplace=True)
     logger.info(new_complete_2[new_complete_2["cert_id"] == 16215])
+    logger.info("Duplicates removed")
 
     logger.info(new_complete_2.columns)
     new_complete_2.rename(
@@ -92,5 +94,13 @@ if __name__ == "__main__":
     )
     new_complete_2 = new_complete_2.loc[:, column_names]
     logger.info(new_complete_2.columns)
+    logger.info("Column standards applied")
+
+    logger.info("Data being exported to output directory.")
+    output_path = "../output/ks-2022-index.csv"
+    dir_path = os.path.dirname(output_path)
+    os.makedirs(dir_path, exist_ok=True)
+    new_complete_2.to_csv(output_path, index=False)
+    logger.info("DONE")
 
 # Done
