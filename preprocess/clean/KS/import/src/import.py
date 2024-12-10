@@ -94,6 +94,7 @@ if __name__ == "__main__":
     )
     new_complete_2 = new_complete_2.loc[:, column_names]
     logger.info(new_complete_2.columns)
+    new_complete_2.end_date.replace('1/1/0001','', inplace=True)
     logger.info("Column standards applied")
 
     logger.info("Data being exported to output directory.")
