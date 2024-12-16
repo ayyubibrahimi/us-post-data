@@ -98,10 +98,11 @@ out = final_df.rename(columns = {
     'PSID': 'person_nbr',
     'employer': 'agency_name',
     'race_ethnicity': 'race',
-    'title_rank': 'rank'})[[
+    'title_rank': 'rank',
+    'status': 'separation_reason'})[[
         'person_nbr', 'agency_name',
         'last_name', 'first_name', 'gender', 'race', 'birth_year',
-        'start_date', 'end_date', 'rank', 'status']]
+        'start_date', 'end_date', 'rank', 'separation_reason']]
 
 # Save the transformed DataFrame to a new spreadsheet
 out.to_csv('output/indiana_index.csv', index=False)
