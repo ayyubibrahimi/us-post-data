@@ -14,6 +14,7 @@ state_links = {
     "illinois": "https://www.dropbox.com/scl/fi/853ypyqq4jz77569npo7w/illinois_index.csv?rlkey=6rsa807ec0an01ndna0jwvmnp&st=3l9fwzw1&dl=1",
     #"indiana": "https://www.dropbox.com/scl/fi/pqurhfpdugciuuzefcau2/indiana_index.csv?rlkey=g6bufpogn4n7bqmrvvz6asm5s&st=bc8tf1k9&dl=1",
     "indiana": "https://www.dropbox.com/scl/fi/vmgoh3ip4n8w0q582x3u8/indiana_index.csv?rlkey=yzuy32qcrnjshsqm9myfx9zm0&st=79r6tcct&dl=1",
+    "kansas": "https://www.dropbox.com/scl/fi/mqst15jw3wh0qbeqvaeko/ks-2022-index.csv?rlkey=e03f23fjdht8q97sdiptiow6z&st=28bsdgxv&dl=1",
     "kentucky": "https://www.dropbox.com/scl/fi/vfrc4hk6rc4xxe7abbrqq/kentucky_index.csv?rlkey=jhon9hgnp0cwptndu8u6pnx5a&st=65tycia0&dl=1",
     "maryland": "https://www.dropbox.com/scl/fi/il78zwhiwr96nkjz1y6qy/maryland_index.csv?rlkey=6zaiii9fyov5qq8j8vb8oln4y&st=ff0jfo7m&dl=1",
     "north_carolina": "https://www.dropbox.com/scl/fi/jjinf4bfyk5umweq203bh/north_carolina_index.csv?rlkey=yrcwnb442xgpbi1ybvrsk6ur8&st=s2ffmcxt&dl=1",
@@ -25,7 +26,8 @@ state_links = {
     "texas": "https://www.dropbox.com/scl/fi/9257upb2n6inzs5sbwbz8/texas_index.csv?rlkey=ulz5ws8qyn0mmzs2feuvtz3c3&st=1jud1usv&dl=1",
     "utah": "https://www.dropbox.com/scl/fi/fmvoa5fvehuhcxuo1kn2n/utah_index.csv?rlkey=itmztmc6mcohioum0gpjwztdw&st=296tbj2w&dl=1",
     "vermont": "https://www.dropbox.com/scl/fi/39hyl81d50bwqu53dyecy/vermont_index.csv?rlkey=3zn94khz6lvmc3eqn77036zf5&st=exsgi7uv&dl=1",
-    "washington": "https://www.dropbox.com/scl/fi/7hrjnpbrgq6iw4bbgozbv/washington_index.csv?rlkey=shs9lpp2vmq38d3gttvp8d65g&st=q59u51v7&dl=1",
+    #"washington": "https://www.dropbox.com/scl/fi/7hrjnpbrgq6iw4bbgozbv/washington_index.csv?rlkey=shs9lpp2vmq38d3gttvp8d65g&st=q59u51v7&dl=1",
+    "washington": "https://www.dropbox.com/scl/fi/mbrnx3i8nj4mj0mlqmlpf/wa-2024-npi-index.csv?rlkey=qxf7zmirlymorffy6lr3g1cyr&st=d94s64o6&dl=1",
     "west_virginia": "https://www.dropbox.com/scl/fi/iubdg5lxd3vf29sfbrwyu/west_virginia_index.csv?rlkey=g8r9fwgxp36xhd9h508n5ztfz&st=aq9zl624&dl=1",
     "wyoming": "https://www.dropbox.com/scl/fi/4c0bb071llxee25vzw4vm/wyoming_index.csv?rlkey=1ihzu4lme06urgrszldkdg0ns&st=gduoqyhf&dl=1",
     }
