@@ -41,6 +41,9 @@ employer_columns   = [c for c in df.columns if c.startswith("employer")]
 # Melt the start date columns
 start_dates_df = df.melt(id_vars=['last_name', 'first_name', 'gender', 'DOB', 'PSID','race_ethnicity'], value_vars=start_date_columns,
                   var_name='Start_Date_Number', value_name='start_date')
+start_dates_df = start_dates_df.dropna(subset=['start_date'])
+
+assert set(df.PSID) == set(start_dates_df.PSID)
 
 # Melt the end date columns
 end_dates_df = df.melt(id_vars=['last_name', 'first_name', 'gender', 'DOB', 'PSID','race_ethnicity'], value_vars=end_date_columns,
@@ -103,6 +106,8 @@ out = final_df.rename(columns = {
         'person_nbr', 'agency_name',
         'last_name', 'first_name', 'gender', 'race', 'birth_year',
         'start_date', 'end_date', 'rank', 'separation_reason']]
+
+assert ~any(out.agency_name.isna())
 
 # Save the transformed DataFrame to a new spreadsheet
 out.to_csv('output/indiana_index.csv', index=False)
