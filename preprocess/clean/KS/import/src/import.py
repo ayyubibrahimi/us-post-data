@@ -1,6 +1,6 @@
 # Authors: LB
 # Mainrainers: LB
-# Copyright:   2023, HRDAG, GPL v2 or later
+# Copyright:   2024, HRDAG, GPL v2 or later
 # =========================================
 # us-post-data/preprocess/clean/KS/import/src
 import pandas as pd
