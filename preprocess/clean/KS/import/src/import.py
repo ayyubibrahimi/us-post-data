@@ -45,7 +45,7 @@ column_names = [
     "middle_name",
     "middle_initial",
     "suffix",
-    "agcy_name",
+    "agency_name",
     "rank",
     "status",
     "start_date",
@@ -100,7 +100,7 @@ if __name__ == "__main__":
             "officers_rank": "rank",
             "stop_or_leave_date": "end_date",
             "cert_id": "person_nbr",
-            "agency_name": "agcy_name",
+            #"agency_name": "agcy_name",
         },
         inplace=True,
     )
