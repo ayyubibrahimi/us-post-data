@@ -11,4 +11,4 @@ normalized-archive/
 *.tsx
 *.json
 preprocess/download
-eda/
+entity-resolution/

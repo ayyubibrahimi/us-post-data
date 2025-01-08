@@ -66,6 +66,7 @@ def clean_names(df):
 
 if __name__ == "__main__":
     data_input = Path("../input/")
+
     filtered_files = [
         x for x in data_input.rglob("*.xls") if not "Certification" in str(x)
     ]
@@ -91,6 +92,7 @@ if __name__ == "__main__":
 
     print("\n")
     logger.info("Current column names")
+
     logger.info(new_complete_2.columns)
     new_complete_2.rename(
         columns={
@@ -103,17 +105,20 @@ if __name__ == "__main__":
         inplace=True,
     )
     new_complete_2 = new_complete_2.loc[:, column_names]
+
     print("\n")
     logger.info("Column standards applied")
     logger.info(new_complete_2.columns)
     new_complete_2["end_date"] = new_complete_2["end_date"].replace("1/1/0001", "")
 
     print("\n")
+
     logger.info("Data being exported to output directory.")
     output_path = "../output/ks-2022-index.csv"
     dir_path = os.path.dirname(output_path)
     os.makedirs(dir_path, exist_ok=True)
     new_complete_2.to_csv(output_path, index=False)
+
     assert complete.duplicated().value_counts().iloc[0] == new_complete_2.shape[0]
     print("\n")
     logger.info(f"Total number of records in data set are {new_complete_2.shape[0]}")

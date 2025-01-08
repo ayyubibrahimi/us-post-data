@@ -4,6 +4,7 @@
 dropbox_url_22 := https://www.dropbox.com/scl/fo/ersykuvzt32dd7d70xd7k/APVe23r1FRoScwu6xxV6NDc?rlkey=s5md5wk85b3r7bud0j3d4zkjt&st=sz64s1v7&dl=1
 
 dropbox_url_24 := https://www.dropbox.com/scl/fo/h3ynxkhcbg32qmnoy336t/ADuo6rJ24eiXxS2qq5gHdgo?rlkey=k45k8hjf8h216v9wiz588bkdf&e=1&st=1cyqj6vp&dl=1
+
 .PHONY: all clean
 
 all: output/ks-2022-index.csv
@@ -30,4 +31,5 @@ input/ks_22.zip:
 input/ks_24.zip:
 	mkdir -p input
 	curl -L -o $@ "$(dropbox_url_24)"
+
 # done.
