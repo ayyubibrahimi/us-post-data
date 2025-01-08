@@ -114,7 +114,7 @@ if __name__ == "__main__":
     print("\n")
 
     logger.info("Data being exported to output directory.")
-    output_path = "../output/ks-2022-index.csv"
+    output_path = "../output/ks-2024-index.csv"
     dir_path = os.path.dirname(output_path)
     os.makedirs(dir_path, exist_ok=True)
     new_complete_2.to_csv(output_path, index=False)

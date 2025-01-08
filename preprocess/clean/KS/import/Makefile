@@ -7,13 +7,13 @@ dropbox_url_24 := https://www.dropbox.com/scl/fo/h3ynxkhcbg32qmnoy336t/ADuo6rJ24
 
 .PHONY: all clean
 
-all: output/ks-2022-index.csv
+all: output/ks-2024-index.csv
 
 clean: 
 	-rm -r output/*
 	-rm -r input/*
 
-output/ks-2022-index.csv: src/import.py output/downloaded-from-dropbox.done
+output/ks-2024-index.csv: src/import.py output/downloaded-from-dropbox.done
 	cd src && python import.py
 
 output/downloaded-from-dropbox.done: input/ks_22.zip input/ks_24.zip
