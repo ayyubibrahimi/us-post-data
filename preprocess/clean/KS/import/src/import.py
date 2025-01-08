@@ -1,6 +1,6 @@
 # Authors: LB
 # Mainrainers: LB
-# Copyright:   2023, HRDAG, GPL v2 or later
+# Copyright:   2024, HRDAG, GPL v2 or later
 # =========================================
 # us-post-data/preprocess/clean/KS/import/src
 import pandas as pd
@@ -66,20 +66,32 @@ def clean_names(df):
 
 if __name__ == "__main__":
     data_input = Path("../input/")
+
+    filtered_files = [
+        x for x in data_input.rglob("*.xls") if not "Certification" in str(x)
+    ]
     complete = pd.concat(
-        pd.read_excel(x, skiprows=5, usecols="c:k") for x in data_input.glob("*.xls")
+        pd.read_excel(x, skiprows=5, usecols="c:k") for x in filtered_files
     )
     logger.info("Data Loaded")
+
     complete.columns = complete.columns.str.lower()
     complete.columns = complete.columns.str.replace(" ", "_")
     new_complete = clean_names(complete)
     new_complete.drop(["unnamed:_3", "unnamed:_4"], axis=1, inplace=True)
     logger.info("Columns cleaned")
+
+    print("\n")
+    logger.info("Checking for duplicates")
     logger.info(new_complete[new_complete["cert_id"] == 16215])
     new_complete_2 = new_complete.copy()
     new_complete_2.drop_duplicates(inplace=True)
-    logger.info(new_complete_2[new_complete_2["cert_id"] == 16215])
+    print("\n")
     logger.info("Duplicates removed")
+    logger.info(new_complete_2[new_complete_2["cert_id"] == 16215])
+
+    print("\n")
+    logger.info("Current column names")
 
     logger.info(new_complete_2.columns)
     new_complete_2.rename(
@@ -93,15 +105,24 @@ if __name__ == "__main__":
         inplace=True,
     )
     new_complete_2 = new_complete_2.loc[:, column_names]
-    logger.info(new_complete_2.columns)
-    new_complete_2["end_date"] = new_complete_2['end_date'].replace('1/1/0001','')
+
+    print("\n")
     logger.info("Column standards applied")
+    logger.info(new_complete_2.columns)
+    new_complete_2["end_date"] = new_complete_2["end_date"].replace("1/1/0001", "")
+
+    print("\n")
 
     logger.info("Data being exported to output directory.")
     output_path = "../output/ks-2022-index.csv"
     dir_path = os.path.dirname(output_path)
     os.makedirs(dir_path, exist_ok=True)
     new_complete_2.to_csv(output_path, index=False)
+
+    assert complete.duplicated().value_counts().iloc[0] == new_complete_2.shape[0]
+    print("\n")
+    logger.info(f"Total number of records in data set are {new_complete_2.shape[0]}")
+    print("\n")
     logger.info("DONE")
 
 # Done
