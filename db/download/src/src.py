@@ -18,7 +18,7 @@ state_links = {
     "kansas": "https://www.dropbox.com/scl/fi/ybk3uwwnnx5qwbyaeugmu/ks-2024-index.csv?rlkey=i25172obz0g4sva86lmx7loep&st=dp9rdxfn&dl=1",
     "kentucky": "https://www.dropbox.com/scl/fi/vfrc4hk6rc4xxe7abbrqq/kentucky_index.csv?rlkey=jhon9hgnp0cwptndu8u6pnx5a&st=65tycia0&dl=1",
     "maryland": "https://www.dropbox.com/scl/fi/il78zwhiwr96nkjz1y6qy/maryland_index.csv?rlkey=6zaiii9fyov5qq8j8vb8oln4y&st=ff0jfo7m&dl=1",
-    "minneapolis": "https://www.dropbox.com/scl/fi/j9c1jalgn0s09witj2a2g/minneapolis-processed.csv?rlkey=j6pdglpmks6h9skig32cwc92q&st=z1u1sp7n&dl=1",
+    "minnesota": "https://www.dropbox.com/scl/fi/ziq65kq88958c7qyn7lv3/mn-index-2025-01-21.csv?rlkey=s4f9oet208tzsyrvf2pmw05y9&st=vag7v22c&dl=1",
     "mississippi": "https://www.dropbox.com/scl/fi/3wdbgs3f79y9gixhevusu/mississippi-processed.csv?rlkey=rxi3tpkxnofowtch9t9d7lx1r&st=ob5us55t&dl=1",
     "north-carolina": "https://www.dropbox.com/scl/fi/frqut5bekxdjvll4tf7re/north-carolina-processed.csv?rlkey=wifb02q85rrytjgobgz6vi5co&st=d5e1in9r&dl=1",
     "new-mexico": "https://www.dropbox.com/scl/fi/jn2qpe6ipjr8ci8dwgukn/new-mexico-preprocessed.csv?rlkey=cyr4myzdhbep5wenfy3frxo34&st=00rifhho&dl=1",
