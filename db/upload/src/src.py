@@ -44,7 +44,7 @@ def read_csv_gz_in_batches(file_path, batch_size=1000):
 def check_state_exists(state_name):
     """Check if state data already exists in Firestore by looking for its first document"""
     doc_id = f"{state_name}-processed.csv_0"
-    doc_ref = db.collection("db").document(doc_id)
+    doc_ref = db.collection("db_launch").document(doc_id)
     doc = doc_ref.get()
     return doc.exists
 
@@ -57,7 +57,7 @@ def delete_state_data(state_name):
     
     while True:
         # Get a batch of documents with matching prefix
-        query = db.collection("db").order_by('__name__')\
+        query = db.collection("db_launch").order_by('__name__')\
                 .start_at([prefix]).end_at([prefix + '\uf8ff']).limit(batch_size)
         docs = list(query.stream())
         
@@ -71,6 +71,7 @@ def delete_state_data(state_name):
             docs_deleted += 1
         
         batch.commit()
+        time.sleep(1) 
         print(f"Deleted {docs_deleted} documents...")
     
     print(f"Finished deleting {docs_deleted} documents for {state_name}")
@@ -97,11 +98,12 @@ def upload_csv_gz_to_firestore(file_path, state_name, force=False, batch_size=10
 
         for row in csv_batch:
             # Removed state field as we're using document ID patterns instead
-            doc_ref = db.collection("db").document(f"{state_name}-processed.csv_{total_rows}")
+            doc_ref = db.collection("db_launch").document(f"{state_name}-processed.csv_{total_rows}")
             firestore_batch.set(doc_ref, row)
             total_rows += 1
 
         commit_batch(firestore_batch)
+        time.sleep(1) 
 
         elapsed_time = time.time() - start_time
         rows_per_second = total_rows / elapsed_time

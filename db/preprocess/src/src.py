@@ -216,6 +216,12 @@ def filter_anons(df: pd.DataFrame) -> pd.DataFrame:
     return df.loc[~df.full_name.str.lower().str.contains("witheld")].copy()
 
 
+def sort_by_uid(df):
+    if "person_nbr" in df.columns:
+        df = df.sort_values("person_nbr")
+    return df
+
+
 def apply_transformations(df, state_name):
     """Apply transformations based on state and available columns"""
     df = (
@@ -227,6 +233,7 @@ def apply_transformations(df, state_name):
         .pipe(apply_proper_casing)
         .pipe(filter_anons)
         .pipe(check_required_columns)
+        .pipe(sort_by_uid)
     )
 
     # Only apply collapse_contiguous_stints for California
@@ -238,10 +245,7 @@ def apply_transformations(df, state_name):
 
 def process_state_data(state_name, input_dir, output_dir, force=False):
     """
-    Process state data and return status as string:
-    'success' - successfully processed
-    'skipped' - skipped due to existing output
-    'failed'  - failed to process
+    Process state data and prepare it for Firestore upload with optimized document IDs
     """
     # Create state-specific output directory
     state_output_dir = os.path.join(output_dir, state_name)
@@ -255,18 +259,21 @@ def process_state_data(state_name, input_dir, output_dir, force=False):
         print(f"Skipping {state_name} - output file already exists")
         return "skipped"
 
-    print(f"Processing {state_name}...")
-    print(f"Input: {input_file_path}")
-    print(f"Output: {output_file_path}")
-
-    if not os.path.exists(input_file_path):
-        print(f"File not found: {input_file_path}")
-        return "failed"
-
     try:
         df = pd.read_csv(input_file_path)
         df = apply_transformations(df, state_name)
+        
+        # Add state field - using simple string replace
+        formatted_state = state_name.lower().replace(' ', '-')
+        df['state'] = formatted_state
+        
+        # Ensure person_nbr is string and pad with zeros
+        df['person_nbr'] = df['person_nbr'].astype(str)
+        
+        # Create document_id field
+        df['document_id'] = df['state'] + '_' + df['person_nbr']
 
+        # Ensure output directory exists
         os.makedirs(os.path.dirname(output_file_path), exist_ok=True)
 
         with gzip.open(output_file_path, "wt", encoding="utf-8") as gz_file:
@@ -274,7 +281,6 @@ def process_state_data(state_name, input_dir, output_dir, force=False):
 
         print(f"Successfully processed {state_name}")
         return "success"
-
     except Exception as e:
         print(f"Error processing {state_name}: {str(e)}")
         return "failed"
