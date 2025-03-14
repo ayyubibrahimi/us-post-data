@@ -12,7 +12,7 @@ state_links = {
     "florida-discipline": "https://www.dropbox.com/scl/fi/2iwmesdziw23ngm9bftu8/florida-discipline_index.csv?rlkey=0s0935k8dbrrnlckx2bzfnzcb&st=w0boolgj&dl=1",
     "georgia": "https://www.dropbox.com/scl/fi/zt5bjmti0ib53zret4cjl/georgia_index.csv?rlkey=vxdihmruxipj0t70qkg6gv3f3&st=vteh8461&dl=1",
     "georgia-discipline": "https://www.dropbox.com/scl/fi/pehr90qu1wl60cx0aqu1e/georgia-discipline_index.csv?rlkey=tzgj77njnkkzswgsigfhrr9w1&st=ig70k39g&dl=1",
-    "idaho": "https://www.dropbox.com/scl/fi/8ympcc6r01bs7usm7erzz/idaho_index.csv?rlkey=dskj3a3czdg4de3ortkeiq7k9&st=oketnn73&dl=1",
+    "idaho": "https://www.dropbox.com/scl/fi/ibxvc1eet0ugfmlpaz5sa/id-index-2025.csv?rlkey=ludawnb34zy84h4d3rvbsap12&st=dof3dp7u&dl=1",
     "illinois": "https://www.dropbox.com/scl/fi/853ypyqq4jz77569npo7w/illinois_index.csv?rlkey=6rsa807ec0an01ndna0jwvmnp&st=3l9fwzw1&dl=1",
     "indiana": "https://www.dropbox.com/scl/fi/vmgoh3ip4n8w0q582x3u8/indiana_index.csv?rlkey=yzuy32qcrnjshsqm9myfx9zm0&st=sm7yqah0&dl=1",
     "kansas": "https://www.dropbox.com/scl/fi/ybk3uwwnnx5qwbyaeugmu/ks-2024-index.csv?rlkey=i25172obz0g4sva86lmx7loep&st=dp9rdxfn&dl=1",
