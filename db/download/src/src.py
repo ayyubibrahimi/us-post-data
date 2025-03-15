@@ -1,7 +1,9 @@
-import os
-import requests
-import pandas as pd
 import io
+import os
+
+import pandas as pd
+import requests
+
 
 # Dictionary of states with their respective Dropbox links
 state_links = {

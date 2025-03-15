@@ -4,16 +4,18 @@
 # =========================================
 # us-post-data/preprocess/clean/CA/scraper/scraper.py
 
-from urllib.request import urlopen
-from bs4 import BeautifulSoup
-import requests
-import pandas as pd
 import logging
 import os
+from urllib.request import urlopen
+
+import pandas as pd
+from bs4 import BeautifulSoup
+
 
 # Configue the logger
 logging.basicConfig(
-    level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+    level=logging.INFO,
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
 )
 
 # Create logger instance
@@ -21,7 +23,9 @@ logger = logging.getLogger(__name__)
 
 
 if __name__ == "__main__":
-    with urlopen("https://post.ca.gov/Peace-Officer-Certification-Actions") as url:
+    with urlopen(
+        "https://post.ca.gov/Peace-Officer-Certification-Actions"
+    ) as url:
         soup = BeautifulSoup(url, "html.parser")
     logger.info("Connecting to site")
 

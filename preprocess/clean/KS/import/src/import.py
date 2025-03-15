@@ -3,15 +3,18 @@
 # Copyright:   2024, HRDAG, GPL v2 or later
 # =========================================
 # us-post-data/preprocess/clean/KS/import/src
-import pandas as pd
-from pathlib import Path
-from nameparser import HumanName
 import logging
 import os
+from pathlib import Path
+
+import pandas as pd
+from nameparser import HumanName
+
 
 # Configue the logger
 logging.basicConfig(
-    level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+    level=logging.INFO,
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
 )
 
 # Create logger instance
@@ -68,7 +71,7 @@ if __name__ == "__main__":
     data_input = Path("../input/")
 
     filtered_files = [
-        x for x in data_input.rglob("*.xls") if not "Certification" in str(x)
+        x for x in data_input.rglob("*.xls") if "Certification" not in str(x)
     ]
     complete = pd.concat(
         pd.read_excel(x, skiprows=5, usecols="c:k") for x in filtered_files
@@ -100,7 +103,7 @@ if __name__ == "__main__":
             "officers_rank": "rank",
             "stop_or_leave_date": "end_date",
             "cert_id": "person_nbr",
-            #"agency_name": "agcy_name",
+            # "agency_name": "agcy_name",
         },
         inplace=True,
     )
@@ -109,7 +112,9 @@ if __name__ == "__main__":
     print("\n")
     logger.info("Column standards applied")
     logger.info(new_complete_2.columns)
-    new_complete_2["end_date"] = new_complete_2["end_date"].replace("1/1/0001", "")
+    new_complete_2["end_date"] = new_complete_2["end_date"].replace(
+        "1/1/0001", ""
+    )
 
     print("\n")
 
@@ -119,9 +124,13 @@ if __name__ == "__main__":
     os.makedirs(dir_path, exist_ok=True)
     new_complete_2.to_csv(output_path, index=False)
 
-    assert complete.duplicated().value_counts().iloc[0] == new_complete_2.shape[0]
+    assert (
+        complete.duplicated().value_counts().iloc[0] == new_complete_2.shape[0]
+    )
     print("\n")
-    logger.info(f"Total number of records in data set are {new_complete_2.shape[0]}")
+    logger.info(
+        f"Total number of records in data set are {new_complete_2.shape[0]}"
+    )
     print("\n")
     logger.info("DONE")
 
