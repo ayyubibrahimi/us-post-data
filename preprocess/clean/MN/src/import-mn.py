@@ -22,7 +22,7 @@ def propagate_uids(df):
     # Process rows sequentially
     processed_rows = []
 
-    for idx, row in result_df.iterrows():
+    for _, row in result_df.iterrows():
         # Check if this is a subtotal row (has 'Subtotal' in last_name)
         if isinstance(row["last_name"], str) and "Subtotal" in row["last_name"]:
             # Process accumulated rows for the previous person
