@@ -37,7 +37,7 @@ if __name__ == "__main__":
 
     logger.info("Searching")
 
-    pdf = dict()
+    pdf = {}
     for link in links:
         pdf[link.text] = link["href"]
 
@@ -60,4 +60,3 @@ if __name__ == "__main__":
     dir_path = os.path.dirname(output_path)
     os.makedirs(dir_path, exist_ok=True)
     new_poca_df.to_csv(output_path, index=False)
-# Done
