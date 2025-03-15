@@ -20,7 +20,6 @@ repos:
     rev: v4.4.0
     hooks:
       - id: trailing-whitespace
-      - id: check-docstring-first
       - id: check-executables-have-shebangs
       - id: check-json
       - id: check-case-conflict
