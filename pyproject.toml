@@ -1,0 +1,7 @@
+[project]
+name = "us-post-data"
+version = "0.1.0"
+description = "This repository contains scripts and notebooks for exploratory analysis of state Peace Officer Standards and Training (POST) datasets."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = []
