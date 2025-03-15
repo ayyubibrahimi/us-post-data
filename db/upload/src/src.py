@@ -46,7 +46,8 @@ def read_csv_gz_in_batches(file_path, batch_size=1000):
 
 
 def check_state_exists(state_name):
-    """Check if state data already exists in Firestore by looking for its first document"""
+    """Check if state data already exists in Firestore by looking for its first
+    document"""
     doc_id = f"{state_name}-processed.csv_0"
     doc_ref = db.collection("db_launch").document(doc_id)
     doc = doc_ref.get()
@@ -169,11 +170,11 @@ def main():
     ]
 
     # Convert force_states list to lowercase set for matching
-    force_states = set(state.lower() for state in (args.force_states or []))
+    force_states = {state.lower() for state in (args.force_states or [])}
 
     # If force_all is True, add all available states to force_states
     if args.force_all:
-        force_states = set(state.lower() for state in state_dirs)
+        force_states = {state.lower() for state in state_dirs}
         print(f"Force uploading all {len(force_states)} available states")
 
     # Get all .csv.gz files from state directories
