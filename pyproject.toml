@@ -4,4 +4,7 @@ version = "0.1.0"
 description = "This repository contains scripts and notebooks for exploratory analysis of state Peace Officer Standards and Training (POST) datasets."
 readme = "README.md"
 requires-python = ">=3.10"
-dependencies = []
+dependencies = [
+    "fuzzywuzzy>=0.18.0",
+    "pandas>=2.2.3",
+]
