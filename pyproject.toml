@@ -7,4 +7,5 @@ requires-python = ">=3.10"
 dependencies = [
     "fuzzywuzzy>=0.18.0",
     "pandas>=2.2.3",
+    "pre-commit>=4.1.0",
 ]
