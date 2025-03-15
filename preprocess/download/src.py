@@ -1,7 +1,9 @@
-import os
-import requests
-import pandas as pd
 import io
+import os
+
+import pandas as pd
+import requests
+
 
 # Dictionary of states with their respective Dropbox links
 state_links = {
@@ -28,7 +30,7 @@ state_links = {
     "washington": "https://www.dropbox.com/scl/fi/7hrjnpbrgq6iw4bbgozbv/washington_index.csv?rlkey=shs9lpp2vmq38d3gttvp8d65g&st=gcj67okf&dl=1",
     "west_virginia": "https://www.dropbox.com/scl/fi/iubdg5lxd3vf29sfbrwyu/west_virginia_index.csv?rlkey=g8r9fwgxp36xhd9h508n5ztfz&st=aq9zl624&dl=1",
     "wyoming": "https://www.dropbox.com/scl/fi/p3rpali2bohcesxko88yc/wyoming_index.csv?rlkey=9do9v4w0qu8g7qdnzwdqdffgx&st=v2svhbe6&dl=0",
-    }
+}
 
 # Directory to save the CSV files
 output_dir = "data"
@@ -41,20 +43,20 @@ for state, url in state_links.items():
     state_dir = os.path.join(output_dir, state)
     os.makedirs(state_dir, exist_ok=True)
     file_path = os.path.join(state_dir, f"{state}_index.csv")
-    
+
     # Check if the file already exists
     if os.path.exists(file_path):
         print(f"{file_path} already exists. Skipping download.")
         continue
-    
+
     # Download the file if it doesn't exist
     response = requests.get(url)
     response.raise_for_status()  # Ensure the download was successful
-    
+
     # Read the CSV file into a pandas DataFrame
     csv_data = pd.read_csv(io.StringIO(response.text))
-    
+
     # Save the DataFrame to a CSV file
     csv_data.to_csv(file_path, index=False)
-    
+
     print(f"Saved {state} data to {file_path}")

@@ -9,7 +9,7 @@ dropbox_url_24 := https://www.dropbox.com/scl/fo/h3ynxkhcbg32qmnoy336t/ADuo6rJ24
 
 all: output/ks-2024-index.csv
 
-clean: 
+clean:
 	-rm -r output/*
 	-rm -r input/*
 

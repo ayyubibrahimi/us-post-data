@@ -1,9 +1,10 @@
-import os
-import gzip
-import pandas as pd
-import datetime
-import numpy as np
 import argparse
+import datetime
+import gzip
+import os
+
+import numpy as np
+import pandas as pd
 
 
 def case_cols(df):
@@ -28,12 +29,16 @@ def case_cols(df):
         if col in df.columns:
             df[col] = df[col].fillna("").astype(str).str.lower().str.strip()
         else:
-            print(f"Column '{col}' not found. Skipping transformation for this column.")
+            print(
+                f"Column '{col}' not found. Skipping transformation for this column."
+            )
     return df
 
 
 def clean_column_names(df):
-    df.columns = df.columns.str.strip().str.lower().str.replace(r"\s+", "", regex=True)
+    df.columns = (
+        df.columns.str.strip().str.lower().str.replace(r"\s+", "", regex=True)
+    )
     return df
 
 
@@ -47,7 +52,7 @@ def clean_dates(df):
     df.loc[:, "end_date"] = df.end_date.astype(str).str.replace(
         r"^nan$", "", regex=True
     )
-    return df[~((df.start_date.fillna("") == ""))]
+    return df[~(df.start_date.fillna("") == "")]
 
 
 def clean_agency_names(df):
@@ -113,9 +118,13 @@ def apply_proper_casing(df):
 
     for col in columns_to_transform:
         if col in df.columns:
-            df[col] = df[col].apply(lambda x: proper_case(str(x)) if pd.notna(x) else x)
+            df[col] = df[col].apply(
+                lambda x: proper_case(str(x)) if pd.notna(x) else x
+            )
         else:
-            print(f"Column '{col}' not found. Skipping proper casing for this column.")
+            print(
+                f"Column '{col}' not found. Skipping proper casing for this column."
+            )
 
     return df
 
@@ -185,13 +194,17 @@ def collapse_contiguous_stints(
     one_day = pd.to_timedelta(1, "days")
     today = pd.to_datetime(datetime.date.today(), utc=False)
     ancient = pd.to_datetime("1800-01-01", utc=False)
-    working = df.sort_values(["person_nbr", "agency_name", "start_date"], inplace=False)
+    working = df.sort_values(
+        ["person_nbr", "agency_name", "start_date"], inplace=False
+    )
     working["start_date"] = working["start_date"].apply(clean_date)
     working["end_date"] = working["end_date"].apply(clean_date)
-    working["start_date"] = pd.to_datetime(working.start_date, utc=False).fillna(
-        ancient
+    working["start_date"] = pd.to_datetime(
+        working.start_date, utc=False
+    ).fillna(ancient)
+    working["end_date"] = pd.to_datetime(working.end_date, utc=False).fillna(
+        today
     )
-    working["end_date"] = pd.to_datetime(working.end_date, utc=False).fillna(today)
     working.loc[working.start_date < ancient, "start_date"] = ancient
     working.loc[working.end_date > today, "end_date"] = today
     grouped = working.groupby(bycols)
@@ -251,8 +264,12 @@ def process_state_data(state_name, input_dir, output_dir, force=False):
     state_output_dir = os.path.join(output_dir, state_name)
     os.makedirs(state_output_dir, exist_ok=True)
 
-    input_file_path = os.path.join(input_dir, state_name, f"{state_name}_index.csv")
-    output_file_path = os.path.join(state_output_dir, f"{state_name}-processed.csv.gz")
+    input_file_path = os.path.join(
+        input_dir, state_name, f"{state_name}_index.csv"
+    )
+    output_file_path = os.path.join(
+        state_output_dir, f"{state_name}-processed.csv.gz"
+    )
 
     # Check if output file already exists
     if os.path.exists(output_file_path) and not force:
@@ -262,16 +279,16 @@ def process_state_data(state_name, input_dir, output_dir, force=False):
     try:
         df = pd.read_csv(input_file_path)
         df = apply_transformations(df, state_name)
-        
+
         # Add state field - using simple string replace
-        formatted_state = state_name.lower().replace(' ', '-')
-        df['state'] = formatted_state
-        
+        formatted_state = state_name.lower().replace(" ", "-")
+        df["state"] = formatted_state
+
         # Ensure person_nbr is string and pad with zeros
-        df['person_nbr'] = df['person_nbr'].astype(str)
-        
+        df["person_nbr"] = df["person_nbr"].astype(str)
+
         # Create document_id field
-        df['document_id'] = df['state'] + '_' + df['person_nbr']
+        df["document_id"] = df["state"] + "_" + df["person_nbr"]
 
         # Ensure output directory exists
         os.makedirs(os.path.dirname(output_file_path), exist_ok=True)
@@ -324,7 +341,9 @@ def main():
     print(f"Found {len(state_dirs)} state directories to process")
 
     for state in state_dirs:
-        result = process_state_data(state, args.input_dir, args.output_dir, args.force)
+        result = process_state_data(
+            state, args.input_dir, args.output_dir, args.force
+        )
         if result == "success":
             successful_states.append(state)
         elif result == "skipped":
@@ -332,7 +351,7 @@ def main():
         else:  # result == "failed"
             failed_states.append(state)
 
-    print(f"\nProcessing complete!")
+    print("\nProcessing complete!")
     print(f"Successfully processed: {len(successful_states)} states")
     print(f"Skipped (already processed): {len(skipped_states)} states")
     print(f"Errors encountered: {len(failed_states)} states")

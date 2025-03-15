@@ -7,7 +7,7 @@ dropbox_url := https://www.dropbox.com/scl/fo/cap9q2zjts5z27qglmozi/AMgkPc1oa0Uv
 
 all: output/wa-2024-npi-index.csv
 
-clean: 
+clean:
 	-rm -r output/*
 
 output/downloaded-from-dropbox.done: input/wa.zip
@@ -22,6 +22,5 @@ input/wa.zip:
 output/wa-2024-npi-index.csv: output/downloaded-from-dropbox.done
 	mkdir -p output
 	Rscript --vanilla src/process.R
-	
-# done.
 
+# done.

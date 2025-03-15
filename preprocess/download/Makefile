@@ -1,8 +1,6 @@
-# Makefile to run the Python script
-
-.PHONY: all download
-
+.PHONY: all
 all: download
 
+.PHONY: download
 download:
 	python3 src.py

@@ -16,5 +16,3 @@ schema:
       - name: agency_type
         description: >
           police, corrections, etc
-
-
