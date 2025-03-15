@@ -8,14 +8,7 @@ https://success.vanillaforums.com/kb/articles/228-using-pull-requests-to-contrib
 ## Describe your changes
 
 
-## Non-obvious technical information
-
-
 ## Checklist before requesting a review
-<!---
-These are suggested things you could add, but what you add will be dependent on
-your repository's standards.
---->
 - [ ] The code runs successfully.
 
 ```commandline
