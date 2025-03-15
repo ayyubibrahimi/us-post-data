@@ -8,13 +8,13 @@ db_url := https://www.dropbox.com/scl/fi/z2q8txhgobvv4mzyz2ity/PUBLIC-NOW-WITH-M
 
 all: output/mn-2025-01-21.csv
 
-clean: 
+clean:
 	-rm -r output/*
 
-input/mn-2025-01-21.xlsx: 
+input/mn-2025-01-21.xlsx:
 	mkdir -p input
 	curl -L -o $@ "$(db_url)"
-	
+
 output/mn-2025-01-21.csv: src/import-mn.py input/mn-2025-01-21.xlsx
 	mkdir -p output
 	python $< --input=input/mn-2025-01-21.xlsx --output=$@
