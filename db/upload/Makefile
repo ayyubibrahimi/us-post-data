@@ -6,12 +6,12 @@ PYTHON = python3
 
 SCRIPT = src/src.py
 
-.PHONY: run run-all
-
 # Normal run
+.PHONY: run
 run:
 	$(PYTHON) $(SCRIPT) --input-dir $(INPUT_DIR) --delay $(DELAY) $(if $(FORCE_STATES),--force-states $(FORCE_STATES))
 
 # Force all states
+.PHONY: run-all
 run-all:
 	$(PYTHON) $(SCRIPT) --input-dir $(INPUT_DIR) --delay $(DELAY) --force-all
