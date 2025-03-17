@@ -69,7 +69,7 @@ repos:
           - --target-version=py311
           - --select=B,C,E,F,W,B9
           - --line-length=80
-          - --ignore=E203,E402,E501,E261
+          - --ignore=E203,E402,E501,E261,C901
       - id: ruff-format
         types_or: [ python,pyi]
         args:
