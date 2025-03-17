@@ -176,13 +176,13 @@ def assign_stint_id(stints: pd.DataFrame) -> pd.DataFrame:
     return stints
 
 
-def clean_date(date_str):
+def clean_date(date_str: str):
     try:
         year = int(date_str[:4])
         if year < 1800 or year > 2100:  # Adjust the range as needed
             return None
         return date_str
-    except:
+    except ValueError:
         return None
 
 
