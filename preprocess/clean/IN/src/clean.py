@@ -30,7 +30,6 @@ def clean_column_names(data):
             "end_date": "end_date_0",
             "title_rank_current": "title_rank_0",
             "status": "status_0",
-            "employing_organization_name": "employer_0",
         }
     )
 
