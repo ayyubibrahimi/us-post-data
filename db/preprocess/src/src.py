@@ -186,10 +186,11 @@ def clean_date(date_str: str):
         return None
 
 
-def collapse_contiguous_stints(
-    df: pd.DataFrame, bycols=["person_nbr", "full_name", "agency_name"]
-) -> pd.DataFrame:
-    # assume missing end dates are current employment, and use today's date for sorting purposes
+def collapse_contiguous_stints(df: pd.DataFrame, by_cols: list) -> pd.DataFrame:
+    if not by_cols:
+        by_cols = ["person_nbr", "full_name", "agency_name"]
+    # assume missing end dates are current employment, and use today's date for
+    # sorting purposes
     # assert df.start_date.notna().all()
     one_day = pd.to_timedelta(1, "days")
     today = pd.to_datetime(datetime.date.today(), utc=False)
@@ -207,12 +208,12 @@ def collapse_contiguous_stints(
     )
     working.loc[working.start_date < ancient, "start_date"] = ancient
     working.loc[working.end_date > today, "end_date"] = today
-    grouped = working.groupby(bycols)
+    grouped = working.groupby(by_cols)
     working["prv_end"] = grouped["end_date"].shift(1, fill_value=today)
     working["new_stint"] = (working.start_date - working.prv_end) > one_day
     working["stint_id"] = grouped["new_stint"].cumsum()
-    collapsible = working.groupby(bycols + ["stint_id"])
-    summaries = {k: lambda x: x.tail(1) for k in df.columns if k not in bycols}
+    collapsible = working.groupby(by_cols + ["stint_id"])
+    summaries = {k: lambda x: x.tail(1) for k in df.columns if k not in by_cols}
     summaries["start_date"] = "min"
     summaries["end_date"] = "max"
     out = collapsible.aggregate(summaries).reset_index()
