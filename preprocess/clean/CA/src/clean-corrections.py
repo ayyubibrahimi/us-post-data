@@ -1,6 +1,3 @@
-# vim: set ts=4 sts=0 sw=4 si fenc=utf-8 et:
-# vim: set fdm=marker fmr={{{,}}} fdl=0 foldcolumn=4:
-
 import argparse
 import pandas as pd
 import re
@@ -244,5 +241,3 @@ if __name__ == '__main__':
     assert origlen == outlen
 
     out.to_csv(args.output, index=False)
-
-# done

@@ -3,12 +3,11 @@
 # Copyright:   2025, HRDAG, GPL v2 or later
 # =========================================
 # us-post-data/preprocess/clean/CA/Make
-#
-# vim: set ts=8 sts=0 sw=8 si fenc=utf-8 noet:
-# vim: set fdm=marker fmr={{{,}}} fdl=0 foldcolumn=4:
 
 officers := input/cpra-23-3241-officers.csv
 employment := input/cpra-23-3241-employment.csv
+
+.PHONY: all clean
 
 all: output/poca_df.csv output/ca-23-index-with-sep-reason.csv
 

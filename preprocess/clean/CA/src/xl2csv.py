@@ -1,6 +1,3 @@
-# vim: set ts=4 sts=0 sw=4 si fenc=utf-8 et:
-# vim: set fdm=marker fmr={{{,}}} fdl=0 foldcolumn=4:
-
 import argparse
 import pandas as pd
 import sys
@@ -52,6 +49,3 @@ if __name__ == '__main__':
     args = getargs()
     xldata = read_sheets(args.input, header=args.header)
     write_sheets(xldata, args.output)
-
-
-# done.
