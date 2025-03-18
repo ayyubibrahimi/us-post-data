@@ -1,7 +1,7 @@
 # US State-level POST Dataset Analysis
 
 *Overview*
-- This repository contains scripts and notebooks for exploratory analysis of state Peace Officer Standards and Training (POST) datasets. 
+- This repository contains scripts and notebooks for exploratory analysis of state Peace Officer Standards and Training (POST) datasets.
 
 *Objective*
 - To analyze POST datasets from different states.
@@ -120,7 +120,7 @@
 #### 1. Preprocess
 Location: `preprocess/`
 
-- **Download**: 
+- **Download**:
   - Contains a directory for BLN tables.
   - Running `make` downloads available tables from the BLN repo stored in Dropbox.
   - Tables not in BLN repo/Dropbox are accessed locally.

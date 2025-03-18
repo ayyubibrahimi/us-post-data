@@ -10,7 +10,7 @@
 
 all: output/poca_df.csv
 
-clean: 
+clean:
 	-rm -r output/*
 
 output/poca_df.csv: scraper/scraper.py
