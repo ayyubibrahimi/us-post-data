@@ -11,6 +11,8 @@ normalized-archive/
 *.json
 preprocess/download
 entity-resolution/
+input
+output
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

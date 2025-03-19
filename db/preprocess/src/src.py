@@ -188,7 +188,7 @@ def clean_date(date_str: str):
 
 def collapse_contiguous_stints(df: pd.DataFrame, by_cols: list) -> pd.DataFrame:
     if not by_cols:
-        by_cols = ["person_nbr", "full_name", "agency_name"]
+        by_cols = ["person_nbr", "first_name", "last_name", "agency_name"]
     # assume missing end dates are current employment, and use today's date for
     # sorting purposes
     # assert df.start_date.notna().all()
@@ -225,9 +225,9 @@ def collapse_contiguous_stints(df: pd.DataFrame, by_cols: list) -> pd.DataFrame:
 
 
 def filter_anons(df: pd.DataFrame) -> pd.DataFrame:
-    if "full_name" not in df.columns:
+    if "last_name" not in df.columns:
         return df
-    return df.loc[~df.full_name.str.lower().str.contains("witheld")].copy()
+    return df.loc[~df.last_name.str.lower().str.contains("withheld")].copy()
 
 
 def sort_by_uid(df):
