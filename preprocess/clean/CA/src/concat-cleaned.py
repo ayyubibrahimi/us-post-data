@@ -1,9 +1,11 @@
-import pandas as pd
 import sys
 
-if __name__ == '__main__':
-    inleo  = sys.argv[1]
-    incor  = sys.argv[2]
+import pandas as pd
+
+
+if __name__ == "__main__":
+    inleo = sys.argv[1]
+    incor = sys.argv[2]
     outname = sys.argv[3]
 
     leo = pd.read_csv(inleo).reset_index(drop=True)

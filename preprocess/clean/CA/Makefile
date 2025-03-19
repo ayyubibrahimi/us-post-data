@@ -42,7 +42,7 @@ output/ca-23-corrections-raw.csv: input/PDSQ118B-C_CDCR-Appts-Seps-2005-2023_Fin
 		--header=6 \
 		--output=$@
 
-input/cpra-23-3241-officers.csv: 
+input/cpra-23-3241-officers.csv:
 	mkdir -p input
 	curl -o $@ -L "https://www.dropbox.com/scl/fi/4wsm43uau7l82otwoahb9/CPRA-23-3241-Officers.csv?rlkey=a02ovkzukt2bio40kdoiqz7ba&st=v808ijue&dl=1"
 
