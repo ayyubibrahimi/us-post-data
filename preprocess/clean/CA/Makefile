@@ -14,9 +14,9 @@ all: output/poca_df.csv output/ca-23-index-with-sep-reason.csv
 clean:
 	-rm -r output/*
 
-output/poca_df.csv: scraper/scraper.py
+output/poca_df.csv: src/scraper.py
 	mkdir -p output
-	cd scraper && python scraper.py
+	cd src && python scraper.py
 
 output/ca-23-index-with-sep-reason.csv: \
 	src/concat-cleaned.py \
