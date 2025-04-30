@@ -1,4 +1,6 @@
-import argparse, nameparser
+import argparse
+
+import nameparser
 import pandas as pd
 
 
@@ -17,10 +19,11 @@ term_code_dictionary = {
     "Z": "Unknown",
 }
 
+
 def getargs():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--input')
-    parser.add_argument('--output')
+    parser.add_argument("--input")
+    parser.add_argument("--output")
     return parser.parse_args()
 
 
@@ -39,10 +42,9 @@ if __name__ == "__main__":
     ca.columns = ca.columns.str.lower()
     ca["separation_reason"] = ca.separation_code.map(term_code_dictionary)
 
-
     out = (
         ca.drop("rank", axis=1)
-            .pipe(clean_names)[
+        .pipe(clean_names)[
             [
                 "post_id",
                 "first_name",

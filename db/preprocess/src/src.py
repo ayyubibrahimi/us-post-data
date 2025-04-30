@@ -186,7 +186,9 @@ def clean_date(date_str: str):
         return None
 
 
-def collapse_contiguous_stints(df: pd.DataFrame, by_cols: list = None) -> pd.DataFrame:
+def collapse_contiguous_stints(
+    df: pd.DataFrame, by_cols: list = None
+) -> pd.DataFrame:
     if not by_cols:
         by_cols = ["person_nbr", "first_name", "last_name", "agency_name"]
     # assume missing end dates are current employment, and use today's date for
