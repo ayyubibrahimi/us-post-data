@@ -4,12 +4,9 @@
 # =========================================
 # us-post-data/preprocess/clean/CA/Make
 
-officers := input/cpra-23-3241-officers.csv
-employment := input/cpra-23-3241-employment.csv
-
 .PHONY: all clean
 
-all: output/poca_df.csv output/ca-23-index-with-sep-reason.csv
+all: output/poca_df.csv output/ca-index.csv
 
 clean:
 	-rm -r output/*
@@ -18,18 +15,18 @@ output/poca_df.csv: src/scraper.py
 	mkdir -p output
 	cd src && python scraper.py
 
-output/ca-23-index-with-sep-reason.csv: \
+output/ca-index.csv: \
 	src/concat-cleaned.py \
-	output/ca-23-leo-processed.csv \
-	output/ca-23-corrections-processed.csv
+	output/ca-leo-processed.csv \
+	output/ca-corrections-processed.csv
 	mkdir -p output
-	python $< output/ca-23-leo-processed.csv output/ca-23-corrections-processed.csv $@
+	python $< output/ca-leo-processed.csv output/ca-corrections-processed.csv $@
 
-output/ca-23-leo-processed.csv: src/clean-cpra-23-3241.py $(officers) $(employment)
+output/ca-leo-processed.csv: src/clean-leo-2024-with-sep-reason.py input/leo-2024-with-sep-reason.xlsx
 	mkdir -p output
-	python $<
+	python $< --input=input/leo-2024-with-sep-reason.xlsx --output=$@
 
-output/ca-23-corrections-processed.csv: src/clean-corrections.py output/ca-23-corrections-raw.csv
+output/ca-corrections-processed.csv: src/clean-corrections.py output/ca-23-corrections-raw.csv
 	mkdir -p output
 	python $< \
 		--input=output/ca-23-corrections-raw.csv \
@@ -42,13 +39,9 @@ output/ca-23-corrections-raw.csv: input/PDSQ118B-C_CDCR-Appts-Seps-2005-2023_Fin
 		--header=6 \
 		--output=$@
 
-input/cpra-23-3241-officers.csv:
+input/leo-2024-with-sep-reason.xlsx:
 	mkdir -p input
-	curl -o $@ -L "https://www.dropbox.com/scl/fi/4wsm43uau7l82otwoahb9/CPRA-23-3241-Officers.csv?rlkey=a02ovkzukt2bio40kdoiqz7ba&st=v808ijue&dl=1"
-
-input/cpra-23-3241-employment.csv:
-	mkdir -p input
-	curl -o $@ -L "https://www.dropbox.com/scl/fi/o0hod3qky1mjic69t0724/CPRA-23-3241-Employment.csv?rlkey=rt0rktkj27l6suht1i6x4t76v&st=hyagcw2u&dl=1"
+	curl -o $@ -L "https://www.dropbox.com/scl/fi/uyrdi2iu9byls6h3tiias/CPRA_R000301-011425__ADHOC-809.xlsx?rlkey=nt9v6s1b2l24efwt9y711al8u&st=jqxwd2gg&dl=1"
 
 input/PDSQ118B-C_CDCR-Appts-Seps-2005-2023_Final.xlsx:
 	mkdir -p input
